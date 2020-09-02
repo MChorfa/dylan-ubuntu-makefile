@@ -6,7 +6,7 @@ A makefile I use to install many of the applications I use on Ubuntu 18.04. This
 While this is created to meet my own needs, it may prove useful to others, so I am sharing it publicly. Use at your own risk, and feel free to take it and modify it. To run this, copy and paste the following into a terminal:
 
 ``` bash
-sudo apt -y install git make ; git clone https://github.com/dylanmtaylor/dylan-ubuntu-makefile.git ; cd dylan-ubuntu-makefile ; make
+sudo apt -y install git make ; git clone https://github.com/MChorfa/dylan-ubuntu-makefile.git ; cd mchorfa-ubuntu-makefile ; make
 ```
 
 Some targets are meant to be executed separately, including:
