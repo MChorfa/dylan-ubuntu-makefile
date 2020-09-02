@@ -4,47 +4,49 @@
 # Inspired by and very loosely based on https://gist.github.com/h4cc/c54d3944cb555f32ffdf25a5fa1f2602
 # Feel free to use this if you would like to without restriction. If you do I'd appreciate it if you let me know.
 
-.PHONY:	all preparations libs update upgrade fonts papirus plasma gnome atom vscode python ruby vagrant graphics obs cad 3dprint darktable networking filezilla harddisk firefox-next google_chrome archives media pandoc system virtualbox ansible docker filesystem tools teamviewer unetbootin steam discord libreoffice_full simplenote scribus mono monodevelop dosbox wine unity3d unifi lastpass kdenlive gitkraken googleplaymusic spotify skype telegram slic3r_master driverppa pts android jetbrains dbeaver
+.PHONY:	all preparations libs update upgrade fonts papirus plasma gnome atom vscode python ruby hashi_stack graphics obs cad 3dprint darktable networking filezilla harddisk firefox-next google_chrome archives media pandoc system virtualbox ansible docker filesystem tools teamviewer unetbootin steam discord libreoffice_full simplenote scribus mono monodevelop dosbox wine unity3d unifi lastpass kdenlive gitkraken googleplaymusic spotify skype telegram slic3r_master driverppa pts android jetbrains dbeaver
 
 all:
 	@echo "Installation of ALL targets"
 	make preparations libs
 	make update
 	make upgrade
-	make papirus gnome plasma
+	# make papirus gnome plasma
 	make python
 	make ruby
-	make atom
+	# make atom
 	make vscode
-	make graphics darktable
-	make cad
-	make 3dprint
-	make obs
+	make graphics
+	# make darktable
+	# make cad
+	# make 3dprint
+	# make obs
 	make networking filezilla google_chrome firefox-next
 	# make dropbox
 	make harddisk
 	make media
 	make pandoc
 	make archives system filesystem tools
-	make ansible virtualbox vagrant
+	make ansible hashi_stack
+	# make virtualbox
 	make docker
-	make teamviewer
-	make steam
-	make libreoffice_full
+	# make teamviewer
+	# make steam
+	# make libreoffice_full
 	make simplenote
-	make scribus
-	make unetbootin
-	make mono
-	make monodevelop
-	make dosbox wine
-	make kdenlive
+	# make scribus
+	# make unetbootin
+	# make mono
+	# make monodevelop
+	# make dosbox wine
+	# make kdenlive
 	make gitkraken
-	make googleplaymusic #spotify
-	make skype telegram discord
+	# make googleplaymusic #spotify
+	# make skype telegram discord
 	make android
 	make jetbrains
 	make dbeaver
-	make pts
+	# make pts
 	make upgrade
 	# make fonts
 
@@ -76,7 +78,7 @@ fonts:
 	curl https://raw.githubusercontent.com/dylanmtaylor/Web-Font-Load/master/install.sh | sudo bash
 	# Refresh font cache
 	fc-cache -v
-	
+
 papirus:
 	sudo add-apt-repository -y ppa:papirus/papirus
 	sudo apt -y install papirus-icon-theme libreoffice-style-papirus
@@ -129,15 +131,23 @@ vscode:
 
 python:
 	make preparations
-	sudo -H apt -y install python-pip python-minimal
-	sudo -H pip install --upgrade pip
+	### python 2
+	# sudo -H apt -y install python-pip python-minimal
+	# sudo -H pip install --upgrade pip
+	### python 3
+	sudo -H apt install -y python3-pip
+	sudo -H apt install -y build-essential libssl-dev libffi-dev python3-dev
+	sudo -H apt install -y python3-venv
 
 ruby:
 	sudo apt -y install ruby ruby-dev ruby-bundler jekyll
 	sudo gem install bundler
 
-vagrant:
-	sudo apt -y install vagrant
+hashi_stack:
+	sudo curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
+	sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+	make update
+	sudo apt -y install vault consul terraform packer nomad vagrant
 
 graphics:
 	# Remove apt package if installed and install the official flatpak version of GIMP as it more closely follows upstream GIMP vesrions
