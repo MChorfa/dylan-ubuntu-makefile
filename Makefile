@@ -151,17 +151,17 @@ hashi_stack:
 
 graphics:
 	# Remove apt package if installed and install the official flatpak version of GIMP as it more closely follows upstream GIMP vesrions
-	sudo apt -y remove gimp
-	if sudo flatpak list | grep org.gimp.GIMP/x86_64/stable; then echo GIMP is already installed; else sudo flatpak -y install https://flathub.org/repo/appstream/org.gimp.GIMP.flatpakref; fi
-	sudo chown -R $$USER:$$USER /home/$$USER # Fix permissions of /home
+	sudo apt -y remove gimp || true
+	if sudo flatpak list | grep org.gimp.GIMP/x86_64/stable; then echo GIMP is already installed; else sudo flatpak -y install https://flathub.org/repo/appstream/org.gimp.GIMP.flatpakref; fi || true
+	sudo chown -R $$USER:$$USER /home/$$USER # Fix permissions of /home || true
 	# The latest Krita is installed using the Krita Lime ppa
-	sudo add-apt-repository -y ppa:kritalime/ppa
-	sudo apt -y install krita
+	sudo add-apt-repository -y ppa:kritalime/ppa || true
+	sudo apt -y install krita || true
 	# Inkscape's latest supported release is officially released as a PPA package.
-	sudo add-apt-repository -y ppa:inkscape.dev/stable
-	sudo apt -y install inkscape
+	sudo add-apt-repository -y ppa:inkscape.dev/stable || true
+	sudo apt -y install inkscape || true
 	# Install additional graphics packages
-	sudo apt -y install graphviz dia ffmpeg jpegoptim mesa-utils
+	sudo apt -y install graphviz dia ffmpeg jpegoptim mesa-utils || true
 
 obs:
 	sudo apt -y install obs-studio
@@ -185,7 +185,7 @@ darktable:
 
 networking:
 	echo "wireshark-common wireshark-common/install-setuid boolean true" | sudo debconf-set-selections # Remove prompt for wireshark
-	sudo apt -y install vinagre remmina pepperflashplugin-nonfree hexchat wireshark-gtk zenmap samba ethtool sshuttle transmission-gtk
+	sudo apt -y install vinagre remmina pepperflashplugin-nonfree hexchat wireshark-gtk nmap samba ethtool sshuttle transmission-gtk
 
 filezilla:
 	sudo apt remove -y filezilla
